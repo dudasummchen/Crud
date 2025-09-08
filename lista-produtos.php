@@ -21,26 +21,27 @@ include_once './include/header.php';
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Produto A</td>
-            <td>Categoria A</td>
-            <td>R$ 10,00</td>
+        <?php
+            $sql = 'SELECT p.ProdutoID, p.Nome"NomeProduto", c.Nome"NomeCategoria", 
+            p.Preco FROM produtos AS p INNER JOIN categorias AS c ON p.ProdutoID = c.CategoriaID;';
+            $resultado = mysqli_query($conexao,$sql);
+           
+            while ( $dado = mysqli_fetch_assoc($resultado)) {
+            ?>
+            <tr>
+            <td> <?php echo $dado['ProdutoID'];?></td>
+            <td> <?php echo $dado['NomeProduto'];?></td>
+            <td> <?php echo $dado['NomeCategoria'];?></td>
+            <td> R$ <?php echo $dado['Preco'];?></td>
             <td>
-              <a href="#" class="btn btn-edit">Editar</a>
-              <a href="#" class="btn btn-delete">Excluir</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Produto B</td>
-            <td>Categoria B</td>
-            <td>R$ 20,00</td>
-            <td>
-              <a href="#" class="btn btn-edit">Editar</a>
-              <a href="#" class="btn btn-delete">Excluir</a>
-            </td>
-          </tr>
+                <a href="salvar-cargos.php?id=" class="btn btn-edit">Editar</a>
+                <a href="#" class="btn btn-delete">Excluir</a>
+              </td>
+            </tr>
+            <?php
+            }
+            ?>
+          
 
         </tbody>
       </table>
