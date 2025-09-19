@@ -14,33 +14,35 @@ include_once './include/header.php';
             <tr>
               <th>ID</th>
               <th>Produto</th>
-              <th>Quantidade</th>
-              <th>Data</th>
+              <th>Funcionario</th>
+              <th>Cliente</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-        <?php
-         $sql = 'SELECT pr.ProducaoID , p.Nome"NomeProduto" , f.Nome"NomeFuncionario" , c.Nome"NomeCliente" FROM producao AS
-          pr INNER JOIN produtos AS p ON pr.ProdutoID = p.ProdutoID INNER JOIN 
-          funcionarios AS f ON pr.ProdutoID = f.FuncionarioID INNER JOIN clientes AS c ON pr.ProdutoID = c.ClienteID;';
-         $resultado = mysqli_query($conexao,$sql);
-         
-         while ( $dado = mysqli_fetch_assoc($resultado)) {
-         ?>
-         <tr>
-           <td><?php echo $dado['ProducaoID'];?></td>
-           <td><?php echo $dado['NomeProduto'];?></td>
-           <td>  <?php echo $dado['NomeFuncionario'];?></td>
-           <td>  <?php echo $dado['NomeCliente'];?></td>
-           <td>
-             <a href="salvar-cargos.php?id=" class="btn btn-edit">Editar</a>
-             <a href="#" class="btn btn-delete">Excluir</a>
-           </td>
-         </tr>
-         <?php
-         }
-         ?>
+          <?php
+          $sql = ' SELECT pr.ProducaoID , p.Nome AS "NomeProduto" , f.Nome AS "NomeFuncionario" , c.Nome AS "NomeCliente" 
+                    FROM producao AS pr 
+                    LEFT JOIN produtos AS p ON pr.ProdutoID = p.ProdutoID 
+                    LEFT JOIN funcionarios AS f ON pr.FuncionarioID = f.FuncionarioID 
+                    LEFT JOIN clientes AS c ON pr.ClienteID = c.ClienteID;';
+          $resultado = mysqli_query($conexao,$sql);
+          
+          while ( $dado = mysqli_fetch_assoc($resultado)) {
+          ?>
+          <tr>
+            <td><?php echo $dado['ProducaoID'];?></td>
+            <td><?php echo $dado['NomeProduto'];?></td>
+            <td><?php echo $dado['NomeFuncionario'];?></td>
+            <td><?php echo $dado['NomeCliente'];?></td>
+            <td>
+            <a href="salvar-produtos.php?id=" class="btn btn-edit">Editar</a>
+            <a href="./action/producao.php?&acao=excluir&id=<?php echo $dado['ProducaoID']?> " class="btn btn-delete">Excluir</a>
+            </td>
+          </tr>
+          <?php
+          }
+          ?>
             
           </tbody>
         </table>
