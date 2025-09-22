@@ -26,12 +26,22 @@ $dado = mysqli_fetch_assoc($resultado);
           <textarea placeholder="Descrição"> <?php echo $dado['Descricao'];?></textarea>
           <select>
             <option value="">Categoria</option>
+            <?php
+            $sql = "SELECT * FROM categorias ORDER BY Nome;";
+            $resultado = mysqli_query($conexao, $sql);
+            while ( $categoria = mysqli_fetch_assoc($resultado)){
+              $selecionado = '';
+              if ( $dado['CategoriaID'] == $categoria['CategoriaID']){
+                $selecionado = 'selected';
+              }
+              echo "<option ".$selecionado." value='".$categoria['CategoriaID']."'>".$categoria['Nome']."</option>";
+            }
+            ?>
+          </select>
           </select>
           <button type="submit">Salvar</button>
         </form>
       </div>
-
-
    
   </main>
 
