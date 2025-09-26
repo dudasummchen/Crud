@@ -8,7 +8,7 @@ include_once './include/header.php';
 $id = $_GET['id'];
 
 //montar o sql
-$sql = "SELECT * FROM produtos WHERE ProdutoID = $id;";
+$sql = "SELECT * FROM produtos WHERE ProdutoID = $id;"; 
 
 //executar o sql
 $resultado = mysqli_query($conexao,$sql);

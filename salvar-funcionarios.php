@@ -8,23 +8,26 @@ include_once './include/header.php';
 $id = $_GET['id'];
 
 //montar o sql
-$sql = "SELECT * FROM funcionarios WHERE FuncionarioID = $id;";
+$sql = "SELECT * FROM funcionarios WHERE FuncionarioID = $id";
 
 //executar o sql
 $resultado = mysqli_query($conexao,$sql);
 
-//pegar o dado
+//pega o dado
 $dado = mysqli_fetch_assoc($resultado);
 ?>
   <main>
 
-    <div id="funcionarios" class="tela">
-        <form class="crud-form">
+         <!-- Telas CRUD -->
+         <div id="funcionarios" class="tela">
+        <form class="crud-form" action="./action/funcionarios.php" method="post">
+          <input type="hidden" name="acao" value="salvar">
+          <input type="hidden" name="id" value="<?php echo $id;?>">
           <h2>Cadastro de Funcionários</h2>
-          <input type="text" placeholder="Nome" value="<?php echo $dado['Nome'];?>">
-          <input type="date" placeholder="Data de Nascimento" value="<?php echo $dado['DataNascimento'];?>">
-          <input type="email" placeholder="Email" value="<?php echo $dado['Email'];?>">
-          <input type="number" placeholder="Salário" value="<?php echo $dado['Salario'];?>">
+          <input type="text" name="Nome" placeholder="Nome" value="<?php echo $dado['Nome'];?>">
+          <input type="date" name="Data_nascimento" placeholder="Data de Nascimento" value="<?php echo $dado['DataNascimento'];?>">
+          <input type="email" name="Email" placeholder="Email" value="<?php echo $dado['Email'];?>">
+          <input type="number" name="Salario" placeholder="Salario" value="<?php echo $dado['Salario'];?>">
           <select name="sexo" required>
             <option value=""?>- Sexo -</option>
             <option value="M" <?php if ($dado['Sexo'] == "M") { echo 'selected'; }?> >Masculino</option>

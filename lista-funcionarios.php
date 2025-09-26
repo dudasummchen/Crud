@@ -29,9 +29,9 @@ include_once './include/header.php';
             ?>
             <tr>
               <td><?php echo $dado['FuncionarioID'];?></td>
-              <td><?php echo utf8_decode($dado['NomeFuncionario']);?></td>
-              <td>  <?php echo utf8_decode($dado['NomeCargo']);?></td>
-              <td>  <?php echo utf8_decode($dado['NomeSetor']);?></td>
+              <td><?php echo $dado['NomeFuncionario'];?></td>
+              <td><?php echo $dado['NomeCargo'];?></td>
+              <td><?php echo $dado['NomeSetor'];?></td>
               <td>
               <a href="salvar-funcionarios.php?id=<?php echo $dado['FuncionarioID']?>" class="btn btn-edit">Editar</a>
               <a href="./action/funcionarios.php?&acao=excluir&id=<?php echo $dado['FuncionarioID']?> " class="btn btn-delete">Excluir</a>
@@ -43,6 +43,7 @@ include_once './include/header.php';
         </tbody>
       </table>
     </div>
+    </main>
 <?php 
   // include dos arquivox
   include_once './include/footer.php';

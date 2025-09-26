@@ -10,7 +10,7 @@ $id = $_REQUEST['id'];
 // validacao
 switch ($acao) {
     case 'excluir':
-        //montar o sql
+        //montar o sql que exclui o registro PEGAR O ID
         $sql = 'DELETE FROM cargos WHERE CargoID ='.$id;
         //executar o SQL
         mysqli_query($conexao,$sql);
@@ -29,10 +29,8 @@ switch ($acao) {
                 //UPDATE
                 $sql = "UPDATE cargos 
                        SET Nome = '$nome', 
-                       TetoSalarial = $tetosalarial
+                       TetoSalarial = '$tetosalarial'
                         WHERE CargoID = $id";
-
-
 
             }
 
